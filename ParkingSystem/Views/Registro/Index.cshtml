@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Register";
 }
 
 <div class="container">
@@ -17,7 +17,7 @@
 
         <div class="col-12 col-md-3 col-xl-6 mb-4 mt-5">
             <div class="row">
-                <h1 style="text-align:center" class="mb-5">Iniciar Sesión</h1>
+                <h1 style="text-align:center" class="mb-5">Registrarse</h1>
                 <form id="loginForm">
                     <div class="mb-4">
                         <div class="input-group col-12">
@@ -71,16 +71,14 @@
                     rules: {
                         email: {
                             required: true
-                            email: true 
                         },
                         pass: {
                             required: true
-                            pass: true
                         }
                     },
                     messages: {
                         email: {
-                            required: "Email requerido"
+                            required: "Email necesario"
                         },
                         pass: {
                             required: "Contraseña necesaria"
@@ -88,13 +86,13 @@
                     },
                     submitHandler: function (form) {
                         alert("Todo bien");
-                        window.location.href = '/Registro/Index';
+                        form.submit();
                     },
                     errorPlacement: function (error, element) {
                         if (element.hasClass("input-valid-out")) {
                             error.appendTo(element);
                             element.attr('placeholder', 'Campo requerido')
-                        } else {    
+                        } else {
                             error.appendTo(element);
                         }
                     },
