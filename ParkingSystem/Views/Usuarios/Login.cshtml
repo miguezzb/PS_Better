@@ -1,0 +1,104 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container">
+    <header>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </header>
+    <div class="row align-items-center" style="height: calc(100% - 60px - 40px);">
+
+        <div class="col-6 col-m-3 col-xs-4">
+            <img src="https://png.pngtree.com/png-vector/20230327/ourmid/pngtree-car-parking-sign-design-template-vector-png-image_6671099.png" class="img-fluid" />
+        </div>
+
+        <div class="col-6 col-m-3 col-xs-4">
+            <div class="row">
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <div class="input-group col-12">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text d-inline-block"><i class="fa-solid fa-user"></i></span>
+                            </div>
+                            <input type="email" id="email" name="email" class="form-control input-valid-out" placeholder="Email address" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <div class="input-group col-12">
+                            <div class="input-group-prepend">
+                                <button id="btnPass" class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-lock"></i></button>
+                            </div>
+                            <input id="pass" name="pass" type="password" class="form-control password input-valid-out" placeholder="Password" required />
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-1">
+                        <button class="submit" type="submit" style="color:white; background-color:dodgerblue"><i class="fa-solid fa-door-open"></i>  LOGIN</button>
+                    </div>
+                </form>
+
+                <div class="col-12">
+                    <label>Don't have an account? <strong style="color:cornflowerblue">Register</strong></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+        <script>
+            $(function () {
+                const $botonPass = $("#btnPass");
+                const $inputPass = $("#pass");
+
+                $botonPass.on("click", function (event) {
+                    if ($inputPass.attr('type') === 'password') {
+                        $inputPass.attr('type', 'text');
+                        $botonPass.html('<i class="fa-solid fa-lock-open" > </i>')
+                    } else {
+                        $inputPass.attr('type', 'password');
+                        $botonPass.html('<i class="fa-solid fa-lock"></i>')
+                    }
+                });
+
+                $("#loginForm").validate({
+                    rules: {
+                        email: {
+                            required: true
+                        },
+                        pass: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        email: {
+                            required: "Email necesario"
+                        },
+                        pass: {
+                            required: "Contraseña necesaria"
+                        }
+                    },
+                    submitHandler: function (form) {
+                        alert("Todo bien");
+                        form.submit();
+                    },
+                    errorPlacement: function (error, element) {
+                        if (element.hasClass("input-valid-out")) {
+                            error.appendTo(element);
+                            element.attr('placeholder', 'Campo requerido')
+                        } else {    
+                            error.appendTo(element);
+                        }
+                    },
+                    errorElement: 'label',
+                    errorClass: 'alert alert-danger alert-validate',
+                });
+            });
+        </script>
+    }
+</div>
