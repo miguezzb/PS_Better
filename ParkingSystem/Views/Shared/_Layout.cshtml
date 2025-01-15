@@ -3,31 +3,33 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ParkingSystem</title>
+    <title>ParkingSystem</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ParkingSystem.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ParkingSystem</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <p class="nav navbar-text">Hello, @User.Identity?.Name!</p>
-                </div>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow justify-content-between">
+            <div>
+                <a class="navbar-brand" asp-area="" asp-controller="Usuarios" asp-action="Login"><img src="https://fotos.pandape.com/PROD/atslogos/6f7da0d2-e471-4d14-9626-a247a9d95e0c_4.png" class="img-fluid" style="height:50px" /></a>
+            </div>
+            <div>
+                <a class="navbar-brand" data-bs-toggle="dropdown"><img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" class="img-fluid" style="height:30px" /></a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><button class="dropdown-item" type="button">Nombre</button></li>
+                    <li><button class="dropdown-item" type="button">Cerrar Sesión</button></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="navbar justify-content-around" style="background-color: #343c49;">
+            <div>
+                <ul class="navbar">
+                    <li class="text-white d-flex flex-column align-items-center nav-link text-sm-center active"><i class="fa-solid fa-solar-panel"></i>Panel</li>
+                    <li class="text-white d-flex flex-column align-items-center nav-link text-sm-center active"><i class="fa-solid fa-car"></i>Vehículos</li>
+                    <li class="text-white d-flex flex-column align-items-center nav-link text-sm-center active"><i class="fa-solid fa-square-parking"></i>E y S</li>
+                    <li class="text-white d-flex flex-column align-items-center nav-link text-sm-center active"><i class="fa-solid fa-user"></i>Usuarios</li>
+                </ul>   
             </div>
         </nav>
     </header>
@@ -37,7 +39,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted text-center p-2">
         <div class="container">
             &copy; 2025 - ParkingSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
