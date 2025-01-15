@@ -1,0 +1,44 @@
+CREATE DATABASE BecariosChambaDiego;
+GO
+
+USE BecariosChambaDiego;
+GO
+
+CREATE TABLE Usuarios (
+IdUsuario INT IDENTITY(1,1) PRIMARY KEY,
+Nombre VARCHAR(20) NOT NULL,
+Apellido VARCHAR(20) NOT NULL,
+Correo NVARCHAR(50) NOT NULL,
+Contrasena NVARCHAR(8) NOT NULL,
+Imagen IMAGE
+);
+GO
+
+CREATE TABLE Tipo_Vehiculo (
+IdTipo INT IDENTITY(1,1) PRIMARY KEY,
+Tipo VARCHAR(20) NOT NULL,
+);
+GO
+
+CREATE TABLE Vehiculo (
+IdVehiculo INT IDENTITY(1,1) PRIMARY KEY,
+Placas NVARCHAR(7) NOT NULL,
+Tipo INT NOT NULL,
+FOREIGN KEY (Tipo) REFERENCES Tipo_Vehiculo(IdTipo),
+);
+GO
+
+CREATE TABLE Entradas_Salidas (
+IdEntrada_Salida INT IDENTITY(1,1) PRIMARY KEY,
+FechaEntrada DATETIME NOT NULL,
+FechaSalida DATETIME NULL,
+PuertaAcceso INT NOT NULL,
+PuertaSalida INT NULL,
+Folio NVARCHAR(14) NOT NULL,
+TotalPagar MONEY NULL,
+UsuarioEntrada INT NOT NULL,
+UsuarioSalida INT NULL,
+FOREIGN KEY (UsuarioEntrada) REFERENCES Usuarios(IdUsuario),
+FOREIGN KEY (UsuarioSalida) REFERENCES Usuarios(IdUsuario)
+);
+GO
