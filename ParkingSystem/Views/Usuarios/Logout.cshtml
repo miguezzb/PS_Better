@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Registrar";
 }
 
 <div class="container-fluid" style="width: 100%;">
@@ -17,7 +17,7 @@
 
         <div class="col-12 col-md-3 col-xl-6 mb-4">
             <div class="row">
-                <h1 style="text-align:center" class="mb-5">Iniciar Sesión</h1>
+                <h1 style="text-align:center" class="mb-5">Registrar</h1>
                 <form id="loginForm">
                     <div class="mb-4">
                         <div class="input-group col-12">
@@ -28,12 +28,21 @@
                         </div>
                     </div>
 
-                    <div class="mb-5">
+                    <div class="mb-4">
                         <div class="input-group col-12">
                             <div class="input-group-prepend">
                                 <button id="btnPass" name="btnPass" class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-lock"></i></button>
                             </div>
                             <input id="pass" name="pass" type="password" class="form-control password input-valid-out" placeholder="Password" required />
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <div class="input-group col-12">
+                            <div class="input-group-prepend">
+                                <button id="btnPass2" name="btnPass2" class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-lock"></i></button>
+                            </div>
+                            <input id="pass2" name="pass2" type="password" class="form-control password input-valid-out" placeholder="Password" required />
                         </div>
                     </div>
 
@@ -56,6 +65,8 @@
             $(document).ready(function () {
                 const $botonPass = $("#btnPass");
                 const $inputPass = $("#pass");
+                const $botonPass2 = $("#btnPass2");
+                const $inputPass2 = $("#pass2");
 
                 $botonPass.on("click", function (event) {
                     if ($inputPass.attr('type') === 'password') {
@@ -67,15 +78,30 @@
                     }
                 });
 
+                $botonPass2.on("click", function (event) {
+                    if ($inputPass2.attr('type') === 'password') {
+                        $inputPass2.attr('type', 'text');
+                        $botonPass2.html('<i class="fa-solid fa-lock-open" > </i>')
+                    } else {
+                        $inputPass2.attr('type', 'password');
+                        $botonPass2.html('<i class="fa-solid fa-lock"></i>')
+                    }
+                });
+
                 $("#loginForm").validate({
                     rules: {
                         email: {
-                            required: true, 
-                            email: true, 
+                            required: true,
+                            email: true,
                         },
                         pass: {
                             required: true,
                             minlength: 8
+                        },
+                        pass2: {
+                            required: true,
+                            minlength: 8,
+                            equalTo: "#pass"
                         }
                     },
                     messages: {
@@ -85,7 +111,12 @@
                         },
                         pass: {
                             required: "Contraseña necesaria",
-                            minlength: "La contraseña debe tener al menos 6 caracteres"
+                            minlength: "La contraseña debe tener al menos 8 caracteres"
+                        },
+                        pass2: {
+                            required: "Contraseña necesaria",
+                            minlength: "La contraseña debe tener al menos 8 caracteres",
+                            equalTo: "La contraseña debe ser igual en ambos campos"
                         }
                     },
                     submitHandler: function (form) {
@@ -103,6 +134,6 @@
                     errorClass: 'alert alert-danger alert-validate',
                 });
             });
-        </script>
+        </script>   
     }
 </div>

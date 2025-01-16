@@ -15,31 +15,53 @@
                 <a class="navbar-brand" asp-area="" asp-controller="Usuarios" asp-action="Login"><img src="https://fotos.pandape.com/PROD/atslogos/6f7da0d2-e471-4d14-9626-a247a9d95e0c_4.png" class="img-fluid" style="height:50px" /></a>
             </div>
             <div>
-                <a class="navbar-brand" data-bs-toggle="dropdown"><img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" class="img-fluid" style="height:30px" /></a>
+                <a class="navbar-brand" data-bs-toggle="dropdown"><img src="https://icon-library.com/images/name-icon-png/name-icon-png-9.jpg" class="img-fluid" style="height:30px" /></a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><button class="dropdown-item" type="button">Nombre</button></li>
                     <li><button class="dropdown-item" type="button">Cerrar Sesión</button></li>
                 </ul>
             </div>
         </nav>
-        <nav class="navbar justify-content-around" style="background-color: #343c49;">
-            <div>
-                <ul class="navbar"> 
-                    <a href="/" style="text-decoration: none;">
-                    <li class="text-white d-flex flex-column align-items-center nav-link text-sm-center active"><i class="fa-solid fa-solar-panel"></i>Panel</li>
-                    </a>
-                    <a href="/Registro/Index" style="text-decoration: none;">
-                        <li class="text-white d-flex flex-column align-items-center nav-link text-sm-center active"><i class="fa-solid fa-car"></i>Vehículos</li>
-                    </a>
-                    <a href="/" style="text-decoration: none;">
-                        <li class="text-white d-flex flex-column align-items-center nav-link text-sm-center active"><i class="fa-solid fa-square-parking"></i>E y S</li>
-                    </a>
-                    <a href="/" style="text-decoration: none;">
-                        <li class="text-white d-flex flex-column align-items-center nav-link text-sm-center active"><i class="fa-solid fa-user"></i>Usuarios</li>
-                    </a>
-                </ul>   
+
+        <nav class="navbar navbar-expand-lg navbarColor">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white d-lg-none d-sm-block navTxtColor" href="/">Menu</a>
+
+                <button class="navbar-toggler navTxtColor" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                SS
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item text-center">
+                            <a class="nav-link navTxtColor" asp-action="Panel" asp-controller="Home">
+                                <i class="fa-solid fa-solar-panel d-lg-block d-none" style="font-size: 1.5rem;"></i>
+                                    <span class="align-items-left">Panel</span>
+                            </a>
+                        </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link navTxtColor" asp-action="Login" asp-controller="Usuarios">
+                                <i class="fa-solid fa-car d-lg-block d-none" style="font-size: 1.5rem;"></i>
+                                <span class="align-items-left">Vehículos</span>
+                            </a>
+                        </li>s
+                        <li class="nav-item text-center">
+                            <a class="nav-link navTxtColor" asp-action="Logout" asp-controller="Usuarios">
+                                <i class="fa-solid fa-square-parking d-lg-block d-none" style="font-size: 1.5rem;"></i>
+                                <span class="align-items-left">E & S</span>
+                            </a>
+                        </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link navTxtColor" asp-action="Login" asp-controller="Usuarios">
+                                <i class="fa-solid fa-users d-lg-block d-none" style="font-size: 1.5rem;"></i>
+                                <span class="align-items-left">Usuarios</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">

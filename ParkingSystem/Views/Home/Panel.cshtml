@@ -2,22 +2,22 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Login";
 }
 
-<div class="container">
+<div class="container-fluid" style="width: 100%;">
     <header>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </header>
-    <div class="row align-items-center" style="height: calc(100% - 60px - 40px);">
 
-        <div class="col-12 col-md-3 col-xl-6 mt-5 d-none d-md-block">
-            <img src="https://png.pngtree.com/png-vector/20230327/ourmid/pngtree-car-parking-sign-design-template-vector-png-image_6671099.png" class="img-fluid" />
+    <div class="row d-flex justify-content-center align-items-center mt-5">
+        <div class="col-12 col-md-3 col-xl-6 mt-5 d-none d-md-block col d-flex align-items-center justify-content-center">
+            <img src="https://static.vecteezy.com/system/resources/previews/039/532/205/non_2x/parking-app-line-yellow-lieanr-circle-iconyellow-lieanr-circle-icon-vector.jpg" class="img-fluid" width="50%" />
         </div>
 
-        <div class="col-12 col-md-3 col-xl-6 mb-4 mt-5">
+        <div class="col-12 col-md-3 col-xl-6 mb-4">
             <div class="row">
-                <h1 style="text-align:center" class="mb-5">Registrarse</h1>
+                <h1 style="text-align:center" class="mb-5">Panel</h1>
                 <form id="loginForm">
                     <div class="mb-4">
                         <div class="input-group col-12">
@@ -31,7 +31,7 @@
                     <div class="mb-5">
                         <div class="input-group col-12">
                             <div class="input-group-prepend">
-                                <button id="btnPass" class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-lock"></i></button>
+                                <button id="btnPass" name="btnPass" class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-lock"></i></button>
                             </div>
                             <input id="pass" name="pass" type="password" class="form-control password input-valid-out" placeholder="Password" required />
                         </div>
@@ -53,7 +53,7 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 
         <script>
-            $(function () {
+            $(document).ready(function () {
                 const $botonPass = $("#btnPass");
                 const $inputPass = $("#pass");
 
@@ -70,30 +70,33 @@
                 $("#loginForm").validate({
                     rules: {
                         email: {
-                            required: true
+                            required: true,
+                            email: true,
                         },
                         pass: {
-                            required: true
+                            required: true,
+                            minlength: 8
                         }
                     },
                     messages: {
                         email: {
-                            required: "Email necesario"
+                            required: "Email requerido",
+                            email: "Por favor, introduce un email válido"
                         },
                         pass: {
-                            required: "Contraseña necesaria"
+                            required: "Contraseña necesaria",
+                            minlength: "La contraseña debe tener al menos 6 caracteres"
                         }
                     },
                     submitHandler: function (form) {
                         alert("Todo bien");
-                        form.submit();
+                        window.location.href = '/';
                     },
                     errorPlacement: function (error, element) {
                         if (element.hasClass("input-valid-out")) {
-                            error.appendTo(element);
-                            element.attr('placeholder', 'Campo requerido')
+                            error.insertAfter(element.parent());
                         } else {
-                            error.appendTo(element);
+                            error.insertAfter(element);
                         }
                     },
                     errorElement: 'label',

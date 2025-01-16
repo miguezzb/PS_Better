@@ -8,7 +8,7 @@ namespace ParkingSystem.Controllers
         {
             return View();
         }
-        public IActionResult Logut()
+        public IActionResult Logout()
         {
             return View();
         }

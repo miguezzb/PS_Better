@@ -20,3 +20,24 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.navbarColor {
+    background: #000000;
+}
+
+.navBtnColor {
+    background-color: #17202a;
+    border: none;
+}
+
+.navTxtColor {
+    color: #FFC300;
+}
+
+.navTxtColor.active {
+    color: white;
+}
+
+.navTxtColor:hover {
+    color: white;
+}
