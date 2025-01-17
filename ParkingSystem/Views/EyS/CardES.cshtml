@@ -1,0 +1,83 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "EyS";
+}
+
+<div class="container-fluid" style="width: 100%;">
+    <header>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </header>
+
+    <div class="row d-flex justify-content-center align-items-center mt-5">
+        <div class="card">
+            <h5 class="card-header d-flex align-items-center" style="font-size: 1.5rem;">
+                <i class="fa-solid fa-square-parking" style="font-size: 2rem; margin-right: 8px;"></i>
+                Entradas y Salidas
+            </h5>
+            <div class="card-body">
+                <h5 class="card-title">Fecha</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                const $botonPass = $("#btnPass");
+                const $inputPass = $("#pass");
+
+                $botonPass.on("click", function (event) {
+                    if ($inputPass.attr('type') === 'password') {
+                        $inputPass.attr('type', 'text');
+                        $botonPass.html('<i class="fa-solid fa-lock-open" > </i>')
+                    } else {
+                        $inputPass.attr('type', 'password');
+                        $botonPass.html('<i class="fa-solid fa-lock"></i>')
+                    }
+                });
+
+                $("#loginForm").validate({
+                    rules: {
+                        email: {
+                            required: true,
+                            email: true,
+                        },
+                        pass: {
+                            required: true,
+                            minlength: 8
+                        }
+                    },
+                    messages: {
+                        email: {
+                            required: "Email requerido",
+                            email: "Por favor, introduce un email válido"
+                        },
+                        pass: {
+                            required: "Contraseña necesaria",
+                            minlength: "La contraseña debe tener al menos 6 caracteres"
+                        }
+                    },
+                    submitHandler: function (form) {
+                        alert("Todo bien");
+                        window.location.href = '/';
+                    },
+                    errorPlacement: function (error, element) {
+                        if (element.hasClass("input-valid-out")) {
+                            error.insertAfter(element.parent());
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    },
+                    errorElement: 'label',
+                    errorClass: 'alert alert-danger alert-validate',
+                });
+            });
+        </script>
+    }
+</div>

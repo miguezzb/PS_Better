@@ -3,6 +3,7 @@
 *@
 @{
     ViewData["Title"] = "Login";
+    var url = ViewBag.url;
 }
 
 <div class="container-fluid" style="width: 100%;">
@@ -43,7 +44,7 @@
                 </form>
 
                 <div class="col-12">
-                    <label>Don't have an account? <strong style="color:cornflowerblue">Register</strong></label>
+                    <label>Don't have an account?</label> <a asp-action="Logout" asp-controller="Usuarios"><strong style="color:cornflowerblue">Register</strong></a>
                 </div>
             </div>
         </div>
@@ -56,6 +57,8 @@
             $(document).ready(function () {
                 const $botonPass = $("#btnPass");
                 const $inputPass = $("#pass");
+
+                var url = "@url";
 
                 $botonPass.on("click", function (event) {
                     if ($inputPass.attr('type') === 'password') {
@@ -93,7 +96,9 @@
 
                         setTimeout(function () {
                             ocultarModal();
-                        }, 3000);
+                            window.location.href = '/Home/Panel';
+                            // console.log(url + '/Home/Panel');
+                        }, 5000);
                     },
                     errorPlacement: function (error, element) {
                         if (element.hasClass("input-valid-out")) {

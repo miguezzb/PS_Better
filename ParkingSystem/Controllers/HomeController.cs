@@ -19,6 +19,7 @@ namespace ParkingSystem.Controllers
         }
         public IActionResult Panel()
         {
+            
             return View();
         }
 
