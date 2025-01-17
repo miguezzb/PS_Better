@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ParkingSystem.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <header>
+        <partial name="_GlobalModal" />
+
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow justify-content-between">
             <div>
                 <a class="navbar-brand" asp-area="" asp-controller="Usuarios" asp-action="Login"><img src="https://fotos.pandape.com/PROD/atslogos/6f7da0d2-e471-4d14-9626-a247a9d95e0c_4.png" class="img-fluid" style="height:50px" /></a>
@@ -78,5 +81,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/global.js" asp-append-version="true"></script>
+    @await Html.PartialAsync("_GlobalModal")
 </body>
 </html>

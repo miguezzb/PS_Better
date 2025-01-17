@@ -120,8 +120,11 @@
                         }
                     },
                     submitHandler: function (form) {
-                        alert("Todo bien");
-                        window.location.href = '/';
+                        mostrarModal();
+
+                        setTimeout(function () {
+                            ocultarModal();
+                        }, 3000);
                     },
                     errorPlacement: function (error, element) {
                         if (element.hasClass("input-valid-out")) {
