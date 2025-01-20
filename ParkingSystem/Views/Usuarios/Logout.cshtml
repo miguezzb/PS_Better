@@ -47,21 +47,23 @@
                     </div>
 
                     <div class="col-12 mb-1">
-                        <button class="submit" type="submit" style="color:white; background-color:dodgerblue"><i class="fa-solid fa-door-open"></i>  LOGIN</button>
+                        <button class="btn btn-github" type="submit"><i class="fa-solid fa-address-card"></i>  REGISTER</button>
                     </div>
                 </form>
-
-                <div class="col-12">
-                    <label>Don't have an account? <strong style="color:cornflowerblue">Register</strong></label>
-                </div>
             </div>
         </div>
     </div>
 
     @section Scripts {
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
+            function GetUrl(action, controller) {
+                const urlBase = '@Url.Action("__action__", "__controller__")';
+                return urlBase.replace("__action__", action).replace("__controller__", controller);
+            }
+
             $(document).ready(function () {
                 const $botonPass = $("#btnPass");
                 const $inputPass = $("#pass");
@@ -120,11 +122,35 @@
                         }
                     },
                     submitHandler: function (form) {
-                        mostrarModal();
+                        var url = GetUrl("Login", "Usuarios");
 
-                        setTimeout(function () {
-                            ocultarModal();
-                        }, 3000);
+                        $.ajax({
+                            type: 'post',
+                            url: url,
+                            beforeSend: function () {
+                                mostrarModal();
+                            },
+                            success: function (data) {
+                                Swal.fire({
+                                    title: "Redirigiendo...",
+                                    text: "Registro Exitoso",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    icon: "success"
+                                });
+
+                                setTimeout(function () {
+                                    ocultarModal();
+                                    window.location.href = url;
+                                }, 3000);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.error("Error en la solicitud:", textStatus, errorThrown);
+                            },
+                            complete: function (jqXHR, textStatus) {
+                                console.log("Solicitud completada con estado:", textStatus);
+                            }
+                        });
                     },
                     errorPlacement: function (error, element) {
                         if (element.hasClass("input-valid-out")) {
