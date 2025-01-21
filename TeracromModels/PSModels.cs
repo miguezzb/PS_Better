@@ -13,6 +13,13 @@
             public string ImagenBase64 { get; set; }
         }
 
+        public class Vehiculo
+        {
+            public int IdVehiculo { get; set; }
+            public string Placas { get; set; }
+            public int Tipo { get; set; }
+        }
+
         public class RespuestaJson
         {
             public bool resultado { get; set; }

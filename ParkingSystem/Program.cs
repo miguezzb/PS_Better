@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using TeracromDatabase;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddTransient<IDatabaseService, DatabaseService>();
 
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
    .AddNegotiate();

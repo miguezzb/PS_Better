@@ -17,37 +17,19 @@
                 <i class="fa-solid fa-square-parking" style="font-size: 2rem; margin-right: 8px;"></i>
                 Entradas y Salidas
             </h5>
+
             <div class="card-body">
                 <h5 class="card-title">Fecha</h5>
-                <div class="container-fluid">
-                    <div class="form-group">
-                        <label for="theInputDateRange">InputDateRange: </label>
-                        <input id="theInputDateRange">
-                    </div>
-                    <div class="params">
-                        <div>
-                            <label for="closeOnSelection">closeOnSelection</label>
-                            <input type="checkbox" id="closeOnSelection"></input>
-                        </div>
-                        <div>
-                            <label for="monthCount">monthCount</label>
-                            <div id="monthCount"></div>
-                        </div>
-                        <div>
-                            <label for="weeksBefore">weeksBefore</label>
-                            <div id="weeksBefore"></div>
-                        </div>
-                        <div>
-                            <label for="weeksAfter">weeksAfter</label>
-                            <div id="weeksAfter"></div>
+
+                <div class="mb-3">
+                    <div class="input-group col-2">
+                        <div class="input-group-prepend">
+                            <button id="btnCal" name="btnCal" class="btn btn-outline-secondary" type="button"><i class="fa-regular fa-calendar"></i></button>
                         </div>
                     </div>
-                    <p>
-                        The current range is: <b><span id="dateRange"></span></b>.
-                    </p>
                 </div>
 
-                <div id="parkingGrid"></div>
+                <div id="gridES"></div>
             </div>
         </div>
     </div>
@@ -63,232 +45,44 @@
 
         <script>
             $(document).ready(function () {
-                const $botonPass = $("#btnPass");
-                const $inputPass = $("#pass");
+                const $gridES = $("#gridES");
+                const $btnCal = $("#btnCal");
 
-                $botonPass.on("click", function (event) {
-                    if ($inputPass.attr('type') === 'password') {
-                        $inputPass.attr('type', 'text');
-                        $botonPass.html('<i class="fa-solid fa-lock-open" > </i>')
-                    } else {
-                        $inputPass.attr('type', 'password');
-                        $botonPass.html('<i class="fa-solid fa-lock"></i>')
-                    }
-                });
-
-                $("#loginForm").validate({
-                    rules: {
-                        email: {
-                            required: true,
-                            email: true,
-                        },
-                        pass: {
-                            required: true,
-                            minlength: 8
-                        }
-                    },
-                    messages: {
-                        email: {
-                            required: "Email requerido",
-                            email: "Por favor, introduce un email válido"
-                        },
-                        pass: {
-                            required: "Contraseña necesaria",
-                            minlength: "La contraseña debe tener al menos 6 caracteres"
-                        }
-                    },
-                    submitHandler: function (form) {
-                        alert("Todo bien");
-                        window.location.href = '/';
-                    },
-                    errorPlacement: function (error, element) {
-                        if (element.hasClass("input-valid-out")) {
-                            error.insertAfter(element.parent());
-                        } else {
-                            error.insertAfter(element);
-                        }
-                    },
-                    errorElement: 'label',
-                    errorClass: 'alert alert-danger alert-validate',
-                });
-            });
-
-            const inputDateRange = new InputDateRange('#theInputDateRange', {
-                alwaysShowCalendar: true,
-                predefinedRanges: getPredefinedRanges(),
-                valueChanged: s => showDateRange(s),
-                rangeEndChanged: s => showDateRange(s),
-                value: new Date(),
-                rangeEnd: DateTime.addDays(new Date(), 2),
-                closeOnSelection: true,
-                handleWheel: false,
-                monthCount: 2,
-                weeksBefore: 0,
-                weeksAfter: 0,
-            });
-            //
-            // show changes
-            function showDateRange(s) {
-                let el = document.querySelector('#dateRange');
-                el.textContent = format('from {value:d} to {rangeEnd:d}', s);
-            }
-            //
-            // init closeOnSelection checkbox
-            const closeOnSelection = document.getElementById('closeOnSelection');
-            closeOnSelection.checked = inputDateRange.closeOnSelection;
-            closeOnSelection.addEventListener('change', () => {
-                inputDateRange.closeOnSelection = closeOnSelection.checked;
-            });
-            //
-            // init monthCount input
-            let monthCount = new InputNumber('#monthCount', {
-                min: 1,
-                step: 1,
-                value: inputDateRange.monthCount,
-                valueChanged: (sender) => {
-                    inputDateRange.monthCount = sender.value;
-                }
-            });
-            //
-            // init weeksBefore input
-            let weeksBefore = new InputNumber('#weeksBefore', {
-                min: 0,
-                step: 1,
-                value: inputDateRange.weeksBefore,
-                valueChanged: (sender) => {
-                    inputDateRange.weeksBefore = sender.value;
-                }
-            });
-            //
-            // init weeksAfter input
-            let weeksAfter = new InputNumber('#weeksAfter', {
-                min: 0,
-                step: 1,
-                value: inputDateRange.weeksAfter,
-                valueChanged: (sender) => {
-                    inputDateRange.weeksAfter = sender.value;
-                }
-            });
-            //
-            // get predefined date ranges
-            function getPredefinedRanges() {
-                let dt = DateTime, now = new Date();
-                return {
-                    // custom
-                    'Custom Range': null,
-                    // days
-                    //'Today': [now, now],
-                    //'Yesterday': [dt.addDays(now, -1), dt.addDays(now, -1)],
-                    //'Tomorrow': [dt.addDays(now, +1), dt.addDays(now, +1)],
-                    // weeks
-                    'This Week': [dt.weekFirst(now), dt.weekLast(now)],
-                    'Last Week': [dt.weekFirst(dt.addDays(now, -7)), dt.weekLast(dt.addDays(now, -7))],
-                    'Next Week': [dt.weekFirst(dt.addDays(now, +7)), dt.weekLast(dt.addDays(now, +7))],
-                    // months
-                    'This Month': [dt.monthFirst(now), dt.monthLast(now)],
-                    'Last Month': [dt.monthFirst(dt.addMonths(now, -1)), dt.monthLast(dt.addMonths(now, -1))],
-                    'Next Month': [dt.monthFirst(dt.addMonths(now, +1)), dt.monthLast(dt.addMonths(now, +1))],
-                    // years
-                    'This Year': [dt.yearFirst(now), dt.yearLast(now)],
-                    'Last Year': [dt.addYears(dt.yearFirst(now), -1), dt.addYears(dt.yearLast(now), -1)],
-                    'Next Year': [dt.addYears(dt.yearFirst(now), +1), dt.addYears(dt.yearLast(now), +1)],
-                };
-            }
-        </script>
-
-        <script type="text/javascript">
-            // Initialize the grid when the document is ready
-            document.addEventListener('DOMContentLoaded', function () {
-                // Create the FlexGrid
-                var grid = new wijmo.grid.FlexGrid('#parkingGrid', {
-                    itemsSource: [], // You'll populate this with your data
+                gridES = new wijmo.grid.FlexGrid('#gridES', {
                     autoGenerateColumns: false,
+                    headersVisibility: 'Column',
                     columns: [
-                        { binding: 'Folio', header: 'Folio', width: 100 },
-                        {
-                            binding: 'Carro',
-                            header: 'Carro',
-                            width: 100,
-                        },
-                        {
-                            binding: 'FechaEntrada',
-                            header: 'Fecha Entrada',
-                            width: 150,
-                            format: 'dd/MM/yyyy HH:mm'
-                        },
-                        {
-                            binding: 'FechaSalida',
-                            header: 'Fecha Salida',
-                            width: 150,
-                            format: 'dd/MM/yyyy HH:mm'
-                        },
-                        {
-                            binding: 'MostrarSalida',
-                            header: 'Mostrar Salida',
-                            width: 150, 
-                            cellTemplate: wijmo.grid.cellmaker.CellMaker.makeButton({
-                                text: 'Mostrar',
-                                click: (e, ctx) => showExit(ctx.item)
-                            })
-                        },
-                        {
-                            binding: 'ReimprimirTicket',
-                            header: 'Reimprimir Ticket',
-                            width: 170,
-                            cellTemplate: wijmo.grid.cellmaker.CellMaker.makeButton({
-                                text: 'Reimprimir',
-                                click: (e, ctx) => reprintTicket(ctx.item)
-                            })
-                        },
-                        {
-                            binding: 'Eliminar',
-                            header: 'Eliminar',
-                            width: 100,
-                            cellTemplate: wijmo.grid.cellmaker.CellMaker.makeButton({
-                                text: 'Eliminar',
-                                click: (e, ctx) => deleteRecord(ctx.item),
-                                cssClass: 'btn-danger'
-                            })
-                        }
-                    ],
-                    allowSorting: true,
-                    allowFiltering: true
+                        { binding: 'folio', header: 'Folio', width: 100 },
+                        { binding: 'correo', header: 'Correo', width: 200 },
+                        { binding: 'fechaEntrada', header: 'Fecha Entrada', width: 200 },
+                        { binding: 'fechaSalida', header: 'Fecha Salida', width: 200 },
+                        { binding: '', header: '', width: 200 },
+                    ]
                 });
 
-                // Function to show exit details
-                function showExit(item) {
-                    // Implement your show exit logic here
-                    console.log('Show exit for item:', item);
-                }
-
-                // Function to reprint ticket
-                function reprintTicket(item) {
-                    // Implement your ticket reprinting logic here
-                    console.log('Reprint ticket for item:', item);
-                }
-
-                // Function to delete record
-                function deleteRecord(item) {
-                    if (confirm('Are you sure you want to delete this record?')) {
-                        // Implement your delete logic here
-                        console.log('Delete item:', item);
+                $btnCal.on("click", function (event) {
+                    if ($btnCal.html() === '<i class="fa-solid fa-calendar"></i>') {
+                        $btnCal.html('<i class="fa-regular fa-calendar"></i>');
+                    } else {
+                        $btnCal.html('<i class="fa-solid fa-calendar"></i>');
                     }
-                }
+                });
 
-                // Load data from your controller
-                loadParkingData();
+                /*
+                function verVehiculos() {
+                    $.ajax({
+                        type: 'post',
+                        data: {},
+                        url: "Vehiculo/GetVehiculo",
+                        success: function (datos) {
+                            gridVehiculos.itemsSource = datos.data;
+                        },
+                        error: function () {
+                            console.error("Error al obtener los vehiculos.");
+                        }
+                    });
+                }*/
             });
-
-            // Function to load parking data
-            function loadParkingData() {
-                fetch('/Parking/GetParkingRecords')  // Replace with your actual endpoint
-                    .then(response => response.json())
-                    .then(data => {
-                        var grid = wijmo.Control.getControl('#parkingGrid');
-                        grid.itemsSource = data;
-                    })
-                    .catch(error => console.error('Error loading parking data:', error));
-            }
         </script>
     }
 </div>

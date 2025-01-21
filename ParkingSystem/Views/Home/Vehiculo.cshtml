@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Vehiculo";
+}
+
+<div class="container-fluid" style="width: 100%;">
+    <header>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link href="https://cdn.grapecity.com/wijmo/5.20242.30/styles/wijmo.min.css" rel="stylesheet">
+    </header>
+
+    <div class="row d-flex justify-content-center align-items-center mt-5">
+        <div class="card">
+            <h5 class="card-header d-flex align-items-center" style="font-size: 1.5rem;">
+                <i class="fa-solid fa-car d-lg-block d-none" style="font-size: 2rem; margin-right: 8px;"></i>
+                Vehículos
+            </h5>
+            <div class="card-body">
+                <div id="vehiculosGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+        <script src="https://cdn.grapecity.com/wijmo/5.20242.30/controls/wijmo.min.js"></script>
+        <script src="https://cdn.grapecity.com/wijmo/5.20242.30/controls/wijmo.input.min.js"></script>
+        <script src="https://cdn.grapecity.com/wijmo/5.20242.30/controls/wijmo.grid.min.js"></script>
+        <script src="https://cdn.grapecity.com/wijmo/5.20242.30/controls/wijmo.grid.filter.min.js"></script>
+        <script src="https://cdn.grapecity.com/wijmo/5.20242.30/controls/wijmo.grid.cellmaker.min.js"></script>
+
+        <script>
+            var gridVehiculos = null;
+
+            function verVehiculos() {
+                $.ajax({
+                    type: 'post',
+                    data: {},
+                    url: "/ParkingSystem/GetVehiculo",
+                    success: function (datos) {
+                        gridVehiculos.itemsSource = datos.data;
+                    },
+                    error: function () {
+                        console.error("Error al obtener los vehiculos.");
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+                gridVehiculos = new wijmo.grid.FlexGrid('#vehiculosGrid', {
+                    autoGenerateColumns: false,
+                    headersVisibility: 'Column',
+                    columns: [
+                        { binding: 'idVehiculo', header: 'Id', width: 100 },
+                        { binding: 'placas', header: 'Placas', width: 200 },
+                        { binding: 'tipo', header: 'Tipo', width: 200 },
+                    ]
+                });
+            });
+        </script>
+    }
+</div>

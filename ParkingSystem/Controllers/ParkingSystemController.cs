@@ -18,7 +18,7 @@ namespace ParkingSystem.Controllers
         [HttpPost]
         public async Task<RespuestaJson> GetVehiculo()
         {
-            RespuestaJson respuesta = await new Vehiculo(_databaseService).GetVehiculo();
+            RespuestaJson respuesta = await new Vehiculos(_databaseService).GetVehiculo();
             return respuesta;
         }
         public IActionResult Index()

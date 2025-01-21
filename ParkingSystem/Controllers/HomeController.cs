@@ -22,6 +22,11 @@ namespace ParkingSystem.Controllers
             return View();
         }
 
+        public IActionResult Vehiculo()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
