@@ -186,3 +186,21 @@ body {
         color: #ffcb05;
         transform: translate(0, -0.25rem);
     }
+
+.wj-inputnumber {
+    width: 10em;
+}
+
+.params > div {
+    margin-bottom: 0.5em;
+}
+
+label {
+    width: 10em;
+    text-align: right;
+    margin-right: 0.5em;
+}
+
+body {
+    margin-bottom: 36px;
+}

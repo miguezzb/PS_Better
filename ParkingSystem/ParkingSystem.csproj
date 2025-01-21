@@ -12,4 +12,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TeracromController\TeracromController.csproj" />
+    <ProjectReference Include="..\TeracromDatabase\TeracromDatabase.csproj" />
+    <ProjectReference Include="..\TeracromModels\TeracromModels.csproj" />
+  </ItemGroup>
+
 </Project>

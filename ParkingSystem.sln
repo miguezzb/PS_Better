@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingSystem", "ParkingSystem\ParkingSystem.csproj", "{F61F85ED-D52A-44CC-A554-894C222DF671}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkingSystem", "ParkingSystem\ParkingSystem.csproj", "{F61F85ED-D52A-44CC-A554-894C222DF671}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeracromController", "TeracromController\TeracromController.csproj", "{CD46FCE2-5AEB-4719-A6A2-71818763132B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeracromDatabase", "TeracromDatabase\TeracromDatabase.csproj", "{C1572CF8-3187-48CA-B82F-01DB0A8AF6C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeracromModels", "TeracromModels\TeracromModels.csproj", "{A488D7E3-E47B-4DD3-83A8-AF416A61E2FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{F61F85ED-D52A-44CC-A554-894C222DF671}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F61F85ED-D52A-44CC-A554-894C222DF671}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F61F85ED-D52A-44CC-A554-894C222DF671}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD46FCE2-5AEB-4719-A6A2-71818763132B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD46FCE2-5AEB-4719-A6A2-71818763132B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD46FCE2-5AEB-4719-A6A2-71818763132B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD46FCE2-5AEB-4719-A6A2-71818763132B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1572CF8-3187-48CA-B82F-01DB0A8AF6C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1572CF8-3187-48CA-B82F-01DB0A8AF6C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1572CF8-3187-48CA-B82F-01DB0A8AF6C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1572CF8-3187-48CA-B82F-01DB0A8AF6C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A488D7E3-E47B-4DD3-83A8-AF416A61E2FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A488D7E3-E47B-4DD3-83A8-AF416A61E2FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A488D7E3-E47B-4DD3-83A8-AF416A61E2FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A488D7E3-E47B-4DD3-83A8-AF416A61E2FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
