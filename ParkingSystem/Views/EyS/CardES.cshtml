@@ -21,11 +21,22 @@
             <div class="card-body">
                 <h5 class="card-title">Fecha</h5>
 
-                <div class="mb-3">
-                    <div class="input-group col-2">
-                        <div class="input-group-prepend">
-                            <button id="btnCal" name="btnCal" class="btn btn-outline-secondary" type="button"><i class="fa-regular fa-calendar"></i></button>
+                <div class="mb-3 d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <div id="dateRange"></div>
+                        <div class="form-check d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label text-start" for="flexCheckDefault">
+                                Todos
+                            </label>
                         </div>
+                    </div>
+
+                    <div class="input-group w-auto">
+                        <div class="input-group-prepend">
+                            <button id="btnPass" name="btnPass" class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-circle-plus"></i></button>
+                        </div>
+                        <input type="text" id="carPlate" name="carPlate" class="form-control input-valid-out" placeholder="Nueva placa" maxlength="7">
                     </div>
                 </div>
 
@@ -45,43 +56,42 @@
 
         <script>
             $(document).ready(function () {
-                const $gridES = $("#gridES");
+                var gridES = null;
                 const $btnCal = $("#btnCal");
+                var dateRange;
 
-                gridES = new wijmo.grid.FlexGrid('#gridES', {
-                    autoGenerateColumns: false,
-                    headersVisibility: 'Column',
-                    columns: [
-                        { binding: 'folio', header: 'Folio', width: 100 },
-                        { binding: 'correo', header: 'Correo', width: 200 },
-                        { binding: 'fechaEntrada', header: 'Fecha Entrada', width: 200 },
-                        { binding: 'fechaSalida', header: 'Fecha Salida', width: 200 },
-                        { binding: '', header: '', width: 200 },
-                    ]
-                });
-
-                $btnCal.on("click", function (event) {
-                    if ($btnCal.html() === '<i class="fa-solid fa-calendar"></i>') {
-                        $btnCal.html('<i class="fa-regular fa-calendar"></i>');
-                    } else {
-                        $btnCal.html('<i class="fa-solid fa-calendar"></i>');
-                    }
-                });
-
-                /*
-                function verVehiculos() {
+                function verEntradasSalidas() {
                     $.ajax({
                         type: 'post',
                         data: {},
-                        url: "Vehiculo/GetVehiculo",
+                        url: "/ParkingSystem/GetEntradasSalidas",
                         success: function (datos) {
-                            gridVehiculos.itemsSource = datos.data;
+                            gridES.itemsSource = datos.data;
                         },
                         error: function () {
                             console.error("Error al obtener los vehiculos.");
                         }
                     });
-                }*/
+                }
+
+                dateRange = new wijmo.input.InputDate('#dateRange', {
+                    placeholder: 'Selecciona una fecha',
+                });
+
+                gridES = new wijmo.grid.FlexGrid('#gridES', {
+                    autoGenerateColumns: false,
+                    headersVisibility: 'Column',
+                    columns: [
+                        { binding: 'idEntrada_Salida', header: 'Id', width: 100 },
+                        { binding: 'folio', header: 'Folio', width: 150 },
+                        { binding: 'carro', header: 'Carro', width: 100 },
+                        { binding: 'fechaEntrada', header: 'Fecha Entrada', width: 200 },
+                        { binding: 'fechaSalida', header: 'Fecha Salida', width: 200 },
+                        { binding: '', header: '', width: 200 },
+                    ],
+                    isReadOnly: true
+                });
+                verEntradasSalidas();
             });
         </script>
     }

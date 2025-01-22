@@ -4,29 +4,31 @@ using static TeracromModels.PSModels;
 
 namespace TeracromController
 {
-    public class Vehiculos
+    public class UsuarioTC
     {
         private readonly IDatabaseService _databaseService;
-        public Vehiculos(IDatabaseService databaseService)
+        public UsuarioTC(IDatabaseService databaseService)
         {
             _databaseService = databaseService;
         }
 
-        public async Task<RespuestaJson> GetVehiculo()
+        public async Task<RespuestaJson> GetUsuarios()
         {
             RespuestaJson respuesta = new RespuestaJson();
 
             try
             {
-                string sql = "SELECT IdVehiculo, Placas, Tipo FROM Vehiculo;";
-                var vehiculo = await _databaseService.QueryAsync<dynamic>(sql);
+                string sql = "SELECT IdUsuario, Nombre, Apellido, Correo, Imagen FROM Usuarios;";
+                var usuario = await _databaseService.QueryAsync<dynamic>(sql);
 
                 respuesta.resultado = true;
-                respuesta.data = vehiculo.Select(s => new Vehiculo
+                respuesta.data = usuario.Select(s => new Usuarios
                 {
-                    IdVehiculo = s.IdVehiculo,
-                    Placas = s.Placas,
-                    Tipo = s.Tipo,
+                    IdUsuario = s.IdUsuario,
+                    Nombre = s.Nombre,
+                    Apellido = s.Apellido,
+                    Correo = s.Correo,
+                    Imagen = s.Imagen
                 }).ToList();
             }
             catch (Exception ex)

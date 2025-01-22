@@ -14,5 +14,10 @@ namespace ParkingSystem.Controllers
         {
             return View();
         }
+
+        public IActionResult UsuariosView()
+        {
+            return View();
+        }
     }
 }

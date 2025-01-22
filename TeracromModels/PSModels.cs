@@ -20,6 +20,19 @@
             public int Tipo { get; set; }
         }
 
+        public class Entradas_Salidas
+        {
+            public int IdEntrada_Salida { get; set; }
+            public DateTime FechaEntrada { get; set; }
+            public DateTime FechaSalida { get; set; }
+            public int PuertaAcceso { get; set; }
+            public int PuertaSalida { get; set; }
+            public string Folio { get; set; }
+            public decimal TotalPagar { get; set; }
+            public int UsuarioEntrada { get; set; }
+            public int UsuarioSalida { get; set; }
+        }
+
         public class RespuestaJson
         {
             public bool resultado { get; set; }

@@ -214,12 +214,28 @@ body {
     margin-bottom: 0.5em;
 }
 
-label {
-    width: 10em;
-    text-align: right;
-    margin-right: 0.5em;
+.btn-del-usuarios {
+    background-color: #e74c3c;
+    color: #fff; 
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px; 
+    cursor: pointer; 
 }
 
-body {
-    margin-bottom: 36px;
+    .btn-del-usuarios:hover {
+        background-color: #c0392b; 
+    }
+
+.btn-add-usuarios {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
+    .btn-add-usuarios:hover {
+        background-color: #2471a3;
+    }

@@ -4,29 +4,30 @@ using static TeracromModels.PSModels;
 
 namespace TeracromController
 {
-    public class Vehiculos
+    public class EntradasSalidasTC
     {
         private readonly IDatabaseService _databaseService;
-        public Vehiculos(IDatabaseService databaseService)
+        public EntradasSalidasTC(IDatabaseService databaseService)
         {
             _databaseService = databaseService;
         }
 
-        public async Task<RespuestaJson> GetVehiculo()
+        public async Task<RespuestaJson> GetEntradasSalidas()
         {
             RespuestaJson respuesta = new RespuestaJson();
 
             try
             {
-                string sql = "SELECT IdVehiculo, Placas, Tipo FROM Vehiculo;";
-                var vehiculo = await _databaseService.QueryAsync<dynamic>(sql);
+                string sql = "SELECT IdEntrada_Salida, Folio, FechaEntrada, FechaSalida FROM Entradas_Salidas;";
+                var entradaSalida = await _databaseService.QueryAsync<dynamic>(sql);
 
                 respuesta.resultado = true;
-                respuesta.data = vehiculo.Select(s => new Vehiculo
+                respuesta.data = entradaSalida.Select(s => new Entradas_Salidas
                 {
-                    IdVehiculo = s.IdVehiculo,
-                    Placas = s.Placas,
-                    Tipo = s.Tipo,
+                    IdEntrada_Salida = s.IdEntrada_Salida,
+                    Folio = s.Folio,
+                    FechaEntrada = s.FechaEntrada,
+                    FechaSalida = s.FechaSalida
                 }).ToList();
             }
             catch (Exception ex)

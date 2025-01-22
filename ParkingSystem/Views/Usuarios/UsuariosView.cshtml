@@ -2,23 +2,32 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Vehiculo";
+    ViewData["Title"] = "UsuariosView";
 }
-
+    
 <div class="container-fluid" style="width: 100%;">
     <header>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link href="https://cdn.grapecity.com/wijmo/5.20242.30/styles/wijmo.min.css" rel="stylesheet">
     </header>
 
-    <div class="row d-flex justify-content-center align-items-center mt-5">
+    <div class="row d-flex justify-content-center mt-5">
         <div class="card">
-            <h5 class="card-header d-flex align-items-center" style="font-size: 1.5rem;">
-                <i class="fa-solid fa-car d-lg-block d-none" style="font-size: 2rem; margin-right: 8px;"></i>
-                Vehículos
-            </h5>
+            <div class="card-header d-flex align-items-center justify-content-between" style="font-size: 1.5rem;">
+                <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-users d-lg-block d-none me-2" style="font-size: 2rem;"></i>
+                    <h5 class="mb-0">Usuarios</h5>
+                </div>
+
+                <div>
+                    <button class="btn btn-add-usuarios me-2"><i class="fa-solid fa-rotate"></i></button>
+                    <button class="btn btn-del-usuarios"><i class="fa-solid fa-user-minus"></i></button>
+                </div>
+            </div>
+
+            
             <div class="card-body">
-                <div id="vehiculosGrid"></div>
+                <div id="usuariosGrid"></div>
             </div>
         </div>
     </div>
@@ -33,15 +42,15 @@
         <script src="https://cdn.grapecity.com/wijmo/5.20242.30/controls/wijmo.grid.cellmaker.min.js"></script>
 
         <script>
-            var gridVehiculos = null;
-
-            function verVehiculos() {
+            var gridUsuarios = null;
+        
+            function verUsuarios() {
                 $.ajax({
                     type: 'post',
                     data: {},
-                    url: "/ParkingSystem/GetVehiculo",
+                    url: "/ParkingSystem/GetUsuarios",
                     success: function (datos) {
-                        gridVehiculos.itemsSource = datos.data;
+                        gridUsuarios.itemsSource = datos.data;
                     },
                     error: function () {
                         console.error("Error al obtener los vehiculos.");
@@ -50,17 +59,20 @@
             }
 
             $(document).ready(function () {
-                gridVehiculos = new wijmo.grid.FlexGrid('#vehiculosGrid', {
+                gridUsuarios = new wijmo.grid.FlexGrid('#usuariosGrid', {
                     autoGenerateColumns: false,
                     headersVisibility: 'Column',
                     columns: [
-                        { binding: 'idVehiculo', header: 'Id', width: 100 },
-                        { binding: 'placas', header: 'Placas', width: 100 },
-                        { binding: 'tipo', header: 'Tipo', width: 50 },
+                        { binding: 'idUsuario', header: 'Id', width: 100 },
+                        { binding: 'nombre', header: 'Nombre', width: 150 },
+                        { binding: 'apellido', header: 'Apellido', width: 150 },
+                        { binding: 'correo', header: 'Correo', width: 225 },
+                        { binding: 'imagen', header: 'Imagen', width: 200 },
+                        { binding: '', header: '', width: 200 } 
                     ],
                     isReadOnly: true
                 });
-                verVehiculos();
+                verUsuarios();
             });
         </script>
     }
