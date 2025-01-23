@@ -7,6 +7,8 @@
     
 <div class="container-fluid" style="width: 100%;">
     <header>
+        <partial name="_ModalAddUser" />
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link href="https://cdn.grapecity.com/wijmo/5.20242.30/styles/wijmo.min.css" rel="stylesheet">
     </header>
@@ -20,12 +22,11 @@
                 </div>
 
                 <div>
-                    <button class="btn btn-add-usuarios me-2"><i class="fa-solid fa-rotate"></i></button>
-                    <button class="btn btn-del-usuarios"><i class="fa-solid fa-user-minus"></i></button>
+                    <button class="btn btn-add-usuarios me-2" id="btnReload" name="btnReload"><i class="fa-solid fa-rotate"></i></button>
+                    <button class="btn btn-del-usuarios" id="btnAddUser" name="btnAddUser"><i class="fa-solid fa-user-plus"></i></i></button>
                 </div>
             </div>
 
-            
             <div class="card-body">
                 <div id="usuariosGrid"></div>
             </div>
@@ -41,9 +42,13 @@
         <script src="https://cdn.grapecity.com/wijmo/5.20242.30/controls/wijmo.grid.filter.min.js"></script>
         <script src="https://cdn.grapecity.com/wijmo/5.20242.30/controls/wijmo.grid.cellmaker.min.js"></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <script>
             var gridUsuarios = null;
-        
+            const $btnReload = $("#btnReload");
+            const $btnAddUser = $("#btnAddUser");
+            
             function verUsuarios() {
                 $.ajax({
                     type: 'post',
@@ -66,12 +71,27 @@
                         { binding: 'idUsuario', header: 'Id', width: 100 },
                         { binding: 'nombre', header: 'Nombre', width: 150 },
                         { binding: 'apellido', header: 'Apellido', width: 150 },
-                        { binding: 'correo', header: 'Correo', width: 225 },
+                        { binding: 'correo', header: 'Correo', width: '*' },
                         { binding: 'imagen', header: 'Imagen', width: 200 },
                         { binding: '', header: '', width: 200 } 
                     ],
                     isReadOnly: true
                 });
+
+                $btnReload.on("click", function (event) {
+                    Swal.fire({
+                        title: "Recargando...",
+                        text: "Refrescando información",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        icon: "info"
+                    });
+                });
+
+                $btnAddUser.on("click", function (event) {
+                    mostrarAddUserModal();
+                });
+
                 verUsuarios();
             });
         </script>

@@ -1,0 +1,86 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Cargando";
+}
+
+<div class="modal fade" id="addUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa-solid fa-user"></i>  Agregar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="input-group col-12">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text d-inline-block"><i class="fa-solid fa-user"></i></span>
+                    </div>
+                    <input class="form-control input-valid-out" placeholder="Nombre" id="nameInputModal" name="nameInputModal" required />
+                </div>
+
+                <div class="input-group col-12 mt-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text d-inline-block"><i class="fa-solid fa-user"></i></span>
+                    </div>
+                    <input id="apellidoInput" name="apellidoInput" class="form-control input-valid-out" placeholder="Apellido" required/>
+                </div>
+
+                <div class="input-group col-12 mt-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text d-inline-block"><i class="fa-solid fa-at"></i></span>
+                    </div>
+                    <input type="email" id="emailInput" name="emailInput" class="form-control input-valid-out" placeholder="Correo electrónico" required/>
+                </div>
+
+                <div class="input-group col-12 mt-3">
+                    <div class="input-group-prepend">
+                        <button id="btnPass" name="btnPass" class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-lock"></i></button>
+                    </div>
+                    <input id="passLblInput" name="passLblInput" type="password" class="form-control password input-valid-out" placeholder="Contraseña" required />
+                </div>
+
+                <div class="input-group col-12 mt-3">
+                    <div class="input-group-prepend">
+                        <button id="btnPassInput" name="btnPass2" class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-lock"></i></button>
+                    </div>
+                    <input id="passLbl2Input" name="passLbl2Input" type="password" class="form-control password input-valid-out" placeholder="Confirmar contraseña" required />
+                </div>
+
+                <div class="input-group mt-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa-solid fa-image"></i></span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="inputGroupFile01"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="btnCloseModal" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-rectangle-xmark"></i></button>
+                <button type="button" id="btnAddModal" class="btn btn-primary"><i class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#addUserModal').on('shown.bs.modal', function () {
+                const $passLblInput = $("#passLblInput");  // Selecciona el campo de contraseña
+
+                // Asocia el evento click al botón dentro del modal
+                $('#btnPass').on("click", function () {
+                    alert("Hola");
+                }s
+            }
+        });
+    </script>
+}

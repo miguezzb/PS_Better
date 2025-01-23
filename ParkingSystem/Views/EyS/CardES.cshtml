@@ -5,7 +5,7 @@
     ViewData["Title"] = "EyS";
 }
 
-<div class="container-fluid" style="width: 100%;">
+<div class="container-fluid" style="vh-100">
     <header>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link href="https://cdn.grapecity.com/wijmo/5.20242.30/styles/wijmo.min.css" rel="stylesheet">
@@ -13,10 +13,16 @@
 
     <div class="row d-flex justify-content-center align-items-center mt-5">
         <div class="card">
-            <h5 class="card-header d-flex align-items-center" style="font-size: 1.5rem;">
-                <i class="fa-solid fa-square-parking" style="font-size: 2rem; margin-right: 8px;"></i>
-                Entradas y Salidas
-            </h5>
+            <div class="card-header d-flex align-items-center justify-content-between" style="font-size: 1.5rem;">
+                <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-square-parking" style="font-size: 2rem; margin-right: 8px;"></i>
+                    <h5 class="mb-0">Entradas y Salidas</h5>
+                </div>
+
+                <div>
+                    <button class="btn btn-add-usuarios me-2" id="btnReload1" name="btnReload1"><i class="fa-solid fa-rotate"></i></button>
+                </div>
+            </div>
 
             <div class="card-body">
                 <h5 class="card-title">Fecha</h5>
@@ -54,10 +60,12 @@
         <script src="https://cdn.grapecity.com/wijmo/5.20242.30/controls/wijmo.grid.filter.min.js"></script>
         <script src="https://cdn.grapecity.com/wijmo/5.20242.30/controls/wijmo.grid.cellmaker.min.js"></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <script>
             $(document).ready(function () {
                 var gridES = null;
-                const $btnCal = $("#btnCal");
+                const $btnReload1 = $("#btnReload1");
                 var dateRange;
 
                 function verEntradasSalidas() {
@@ -78,12 +86,22 @@
                     placeholder: 'Selecciona una fecha',
                 });
 
+                $btnReload1.on("click", function (event) {
+                    Swal.fire({
+                        title: "Recargando...",
+                        text: "Refrescando información",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        icon: "info"
+                    });
+                });
+
                 gridES = new wijmo.grid.FlexGrid('#gridES', {
                     autoGenerateColumns: false,
                     headersVisibility: 'Column',
                     columns: [
                         { binding: 'idEntrada_Salida', header: 'Id', width: 100 },
-                        { binding: 'folio', header: 'Folio', width: 150 },
+                        { binding: 'folio', header: 'Folio', width: '*' },
                         { binding: 'carro', header: 'Carro', width: 100 },
                         { binding: 'fechaEntrada', header: 'Fecha Entrada', width: 200 },
                         { binding: 'fechaSalida', header: 'Fecha Salida', width: 200 },

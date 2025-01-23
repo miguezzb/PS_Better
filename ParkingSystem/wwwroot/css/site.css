@@ -215,16 +215,16 @@ body {
 }
 
 .btn-del-usuarios {
-    background-color: #e74c3c;
-    color: #fff; 
+    background-color: #28b463;
+    color: #fff;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 5px; 
-    cursor: pointer; 
+    border-radius: 5px;
+    cursor: pointer;
 }
 
     .btn-del-usuarios:hover {
-        background-color: #c0392b; 
+        background-color: #229954;
     }
 
 .btn-add-usuarios {
@@ -238,4 +238,46 @@ body {
 
     .btn-add-usuarios:hover {
         background-color: #2471a3;
+    }
+
+/* Fondo  del modal personalizado */
+#addUserModal .modal-content {
+    background-color: #ffffff;
+    opacity: 1;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+#addUserModal .modal-backdrop.show {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+#addUserModal .modal.fade.show {
+    opacity: 1;
+}
+
+#btnCloseModal {
+    background-color: #cb4335;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    #btnCloseModal:hover {
+        background-color: #a93226;
+    }
+
+#btnAddModal {
+    background-color: #28b463;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    #btnAddModal:hover {
+        background-color: #229954;
     }
