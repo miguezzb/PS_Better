@@ -30,6 +30,13 @@ namespace ParkingSystem.Controllers
         }
 
         [HttpPost]
+        public async Task<RespuestaJson> PostUsuario([FromBody] PSModels.Usuarios ususario)
+        {
+            RespuestaJson respuesta = await new UsuarioTC(_databaseService).PostUsuario(ususario);
+            return respuesta;
+        }
+
+        [HttpPost]
         public async Task<RespuestaJson> GetEntradasSalidas()
         {
             RespuestaJson respuesta = await new EntradasSalidasTC(_databaseService).GetEntradasSalidas();

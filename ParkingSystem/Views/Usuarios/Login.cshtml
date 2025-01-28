@@ -56,15 +56,11 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
-            function GetUrl(action, controller) {
-                const urlBase = '@Url.Action("__action__", "__controller__")';
-                return urlBase.replace("__action__", action).replace("__controller__", controller);
-            }
-
             $(document).ready(function () {
                 const $botonPass = $("#btnPass");
                 const $inputPass = $("#pass");
                 const $registro = $("#regLink");
+                const urlRegister = '@Url.Action("Logout", "Usuarios")';
 
                 //var url = "url"; aquí le hacía falta un arroba
 
@@ -79,13 +75,11 @@
                 });
 
                 $registro.on("click", function (event) {
-                    var url = GetUrl("Logout", "Usuarios");
-
                     mostrarModal();
 
                     setTimeout(function () {
                         ocultarModal();
-                        window.location.href = url;
+                        window.location.href = urlRegister;
                     }, 2500);
                 });
 
@@ -111,11 +105,11 @@
                         }
                     },
                     submitHandler: function (form) {
-                        var url = GetUrl("Panel", "Home");
+                        const urlGetUsuarios = '@(Url.Action("Panel", "Home"))';
 
                         $.ajax({
                             type: 'post',
-                            url: url,
+                            url: urlGetUsuarios,
                             beforeSend: function () {
                                 mostrarModal();
                             },
@@ -127,10 +121,9 @@
                                     timer: 2000,
                                     icon: "success"
                                 });
-                               
                                 setTimeout(function () {
-                                    ocultarModal(); 
-                                    window.location.href = url;  
+                                    ocultarModal();
+                                    window.location.href = urlGetUsuarios;
                                 }, 3000);
                             },
                             error: function (jqXHR, textStatus, errorThrown) {

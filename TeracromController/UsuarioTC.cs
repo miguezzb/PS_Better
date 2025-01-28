@@ -37,5 +37,43 @@ namespace TeracromController
             }
             return respuesta;
         }
+
+        public async Task<RespuestaJson> PostUsuario(Usuarios usuario)
+        {
+            RespuestaJson respuesta = new RespuestaJson();
+            try
+            {
+                string sql = @"INSERT INTO Usuarios (Nombre, Apellido, Correo, Contrasena Imagen) 
+                       VALUES (@Nombre, @Apellido, @Correo, @Contrasena, @Imagen);";
+
+                var parametros = new
+                {
+                    Nombre = usuario.Nombre,
+                    Apellido = usuario.Apellido,
+                    Correo = usuario.Correo,
+                    Contrasena = usuario.Contrasena,
+                    Imagen = usuario.Imagen
+                };
+
+                var resultado = await _databaseService.ExecuteAsync(sql, parametros);
+
+                if (resultado > 0)
+                {
+                    respuesta.resultado = true;
+                    respuesta.mensaje = "Usuario insertado correctamente.";
+                }
+                else
+                {
+                    respuesta.resultado = false;
+                    respuesta.mensaje = "No se pudo insertar el usuario.";
+                }
+            }
+            catch (Exception ex)
+            {
+                respuesta.resultado = false;
+                respuesta.mensaje = "Ocurrió un error: " + ex.Message;
+            }
+            return respuesta;
+        }
     }
 }

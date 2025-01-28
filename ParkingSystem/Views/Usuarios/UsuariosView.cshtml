@@ -23,7 +23,7 @@
 
                 <div>
                     <button class="btn btn-add-usuarios me-2" id="btnReload" name="btnReload"><i class="fa-solid fa-rotate"></i></button>
-                    <button class="btn btn-del-usuarios" id="btnAddUser" name="btnAddUser"><i class="fa-solid fa-user-plus"></i></i></button>
+                    <button class="btn btn-del-usuarios" id="btnAddUser" name="btnAddUser"><i class="fa-solid fa-user-plus"></i></button>
                 </div>
             </div>
 
@@ -48,12 +48,14 @@
             var gridUsuarios = null;
             const $btnReload = $("#btnReload");
             const $btnAddUser = $("#btnAddUser");
+            const urlGetUsuarios = '@(Url.Action("GetUsuarios", "ParkingSystem"))';
             
             function verUsuarios() {
                 $.ajax({
                     type: 'post',
-                    data: {},
-                    url: "/ParkingSystem/GetUsuarios",
+                    data: {
+                    },
+                    url: urlGetUsuarios,
                     success: function (datos) {
                         gridUsuarios.itemsSource = datos.data;
                     },

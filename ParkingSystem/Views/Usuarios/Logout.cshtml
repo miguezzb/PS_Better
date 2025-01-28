@@ -59,16 +59,12 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
-            function GetUrl(action, controller) {
-                const urlBase = '@Url.Action("__action__", "__controller__")';
-                return urlBase.replace("__action__", action).replace("__controller__", controller);
-            }
-
             $(document).ready(function () {
                 const $botonPass = $("#btnPass");
                 const $inputPass = $("#pass");
                 const $botonPass2 = $("#btnPass2");
                 const $inputPass2 = $("#pass2");
+                const urlGetUsuarios = '@Url.Action("Login", "Usuarios")';
 
                 $botonPass.on("click", function (event) {
                     if ($inputPass.attr('type') === 'password') {
@@ -122,11 +118,9 @@
                         }
                     },
                     submitHandler: function (form) {
-                        var url = GetUrl("Login", "Usuarios");
-
                         $.ajax({
                             type: 'post',
-                            url: url,
+                            url: urlGetUsuarios,
                             beforeSend: function () {
                                 mostrarModal();
                             },
@@ -141,7 +135,7 @@
 
                                 setTimeout(function () {
                                     ocultarModal();
-                                    window.location.href = url;
+                                    window.location.href = urlGetUsuarios;
                                 }, 3000);
                             },
                             error: function (jqXHR, textStatus, errorThrown) {

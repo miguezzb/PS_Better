@@ -67,12 +67,14 @@
                 var gridES = null;
                 const $btnReload1 = $("#btnReload1");
                 var dateRange;
+                const urlGetUsuarios = '@(Url.Action("GetEntradasSalidas", "ParkingSystem"))';
 
                 function verEntradasSalidas() {
                     $.ajax({
                         type: 'post',
-                        data: {},
-                        url: "/ParkingSystem/GetEntradasSalidas",
+                        data: {
+                        },
+                        url: urlGetUsuarios,
                         success: function (datos) {
                             gridES.itemsSource = datos.data;
                         },

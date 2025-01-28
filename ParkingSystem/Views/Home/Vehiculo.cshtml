@@ -34,12 +34,14 @@
 
         <script>
             var gridVehiculos = null;
+            const urlGetUsuarios = '@(Url.Action("GetVehiculo", "ParkingSystem"))';
 
             function verVehiculos() {
                 $.ajax({
                     type: 'post',
-                    data: {},
-                    url: "/ParkingSystem/GetVehiculo",
+                    data: {
+                    },
+                    url: urlGetUsuarios,
                     success: function (datos) {
                         gridVehiculos.itemsSource = datos.data;
                     },
