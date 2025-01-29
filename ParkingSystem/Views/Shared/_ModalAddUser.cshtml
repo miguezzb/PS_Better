@@ -8,7 +8,6 @@
 <div class="modal fade" id="addUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-
             <div class="modal-header">
                 <h5 class="modal-title"><i class="fa-solid fa-user"></i>  Agregar Usuario</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -70,149 +69,145 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
-    // $(document).ready(function () {
+    const formData = new FormData();
+    console.log(formData);
 
-        const formData = new FormData();
-        console.log(formData);
+    let $nombreInput = $("#nameInputModal");
+    let $apellidoInput = $("#apellidoInput");
+    let $btnPass = $("#btnPass");
+    let $passLblInput = $("#passLblInput");
+    let $btnPass2 = $("#btnPass2");
+    let $passLbl2Input = $("#passLbl2Input");
+    let $imagen = $("#inputGroupFile01");
+    let $btnAddModal = $("#btnAddModal");
 
-        let $nombreInput = $("#nameInputModal");
-        let $apellidoInput = $("#apellidoInput");
-        let $btnPass = $("#btnPass");
-        let $passLblInput = $("#passLblInput");
-        let $btnPass2 = $("#btnPass2");
-        let $passLbl2Input = $("#passLbl2Input");
-        let $imagen = $("#inputGroupFile01");
-        let $btnAddModal = $("#btnAddModal");
-
-        $('#addUserModal').on('shown.bs.modal', function () {
-            $btnPass.on("click", function (event) {
-               if ($passLblInput.attr('type') === 'password') {
-                        $passLblInput.attr('type', 'text');
-                        $btnPass.html('<i class="fa-solid fa-lock-open" > </i>')
-               }else{
-                   $passLblInput.attr('type', 'password');
-                   $btnPass.html('<i class="fa-solid fa-lock"></i>')
-               }
-            });
-
-            $btnPass2.on("click", function (event) {
-               if ($passLbl2Input.attr('type') === 'password') {
-                        $passLbl2Input.attr('type', 'text');
-                        $btnPass2.html('<i class="fa-solid fa-lock-open" > </i>')
-               }else{
-                   $passLbl2Input.attr('type', 'password');
-                   $btnPass2.html('<i class="fa-solid fa-lock"></i>')
-               }
-            });
-
-            $btnAddModal.on("click", function (event) {
-               Swal.fire({
-                        title: "Registrando...",
-                        text: "Registrando usuario",
-                        showConfirmButton: false,
-                        timer: 2000,
-                        icon: "success"
-               });
-                    ocultarAddUserModal();
-                    verUsuarios();
-            });
-
-            $("#addUserModal").validate({
-                    rules: {
-                        nameInputModal: {
-                            required: true,
-                        },
-                        apellidoInput: {
-                            required: true,
-                        },
-                        emailInput: {
-                            required: true,
-                        },
-                        passLblInput: {
-                            required: true,
-                            minlength: 8
-                        },
-                        passLbl2Input: {
-                            required: true,
-                            minlength: 8
-                        },
-                        inputGroupFile01: {
-                            required: true,
-                        }
-                    },
-                    messages: {
-                        nameInputModal: {
-                            required: "Nombre requerido",  
-                        },
-                        apellidoInput: {
-                            required: "Apellido requerido",
-                        },
-                        emailInput: {
-                            required: "Email requerido",
-                        },
-                        passLblInput: {
-                            required: "Constraseña requerida",
-                            minlength: "La contraseña debe tener al menos 6 caracteres"
-                        },
-                        passLbl2Input: {
-                            required: "Constraseña requerida",
-                            minlength: "La contraseña debe tener al menos 6 caracteres"
-                        },
-                        inputGroupFile01: {
-                            required: "Imagen requerida",
-                        }
-                    },
-                    submitHandler: function (form) {
-                        const urlPostUsuarios = '@(Url.Action("PostUsuario", "ParkingSystem"))';
-                        const urlViewUsuarios = '@(Url.Action("UsuariosView", "Usuarios"))';
-
-                        $.ajax({
-                            type: 'post',
-                            data: {
-                                ususario:{
-                                    Nombre: $nombreInput[0].value,
-                                    Apellido: $apellidoInput[0].value,
-                                    Correo: $emailInput[0].value,
-                                    Contrasena: $passLblInput[0].value,
-                                    Imagen: $imagen[0].value,
-                                }                            
-                            },
-                            url: urlPostUsuarios,
-                            beforeSend: function () {
-                                mostrarModal();
-                            },
-                            success: function (data) {
-                                Swal.fire({
-                                    title: "Redirigiendo...",
-                                    text: "Inicio de Sesión Exitoso",
-                                    showConfirmButton: false,
-                                    timer: 2000,
-                                    icon: "success"
-                                });
-                                setTimeout(function () {
-                                    ocultarModal();
-                                    window.location.href = urlViewUsuarios;
-                                }, 3000);
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                console.error("Error en la solicitud:", textStatus, errorThrown);
-                            },
-                            complete: function (jqXHR, textStatus) {
-                                console.log("Solicitud completada con estado:", textStatus);
-                            }
-                        });
-                    },
-                    errorPlacement: function (error, element) {
-                        if (element.hasClass("input-valid-out")) {
-                            error.insertAfter(element.parent());
-                        } else {
-                            error.insertAfter(element);
-                        }
-                    },
-                    errorElement: 'label',
-                    errorClass: 'alert alert-danger alert-validate',
-                });
-
+    $('#addUserModal').on('shown.bs.modal', function () {
+        $btnPass.on("click", function (event) {
+            if ($passLblInput.attr('type') === 'password') {
+                    $passLblInput.attr('type', 'text');
+                    $btnPass.html('<i class="fa-solid fa-lock-open" > </i>')
+            }else{
+                $passLblInput.attr('type', 'password');
+                $btnPass.html('<i class="fa-solid fa-lock"></i>')
+            }
         });
-    // });
+
+        $btnPass2.on("click", function (event) {
+            if ($passLbl2Input.attr('type') === 'password') {
+                    $passLbl2Input.attr('type', 'text');
+                    $btnPass2.html('<i class="fa-solid fa-lock-open" > </i>')
+            }else{
+                $passLbl2Input.attr('type', 'password');
+                $btnPass2.html('<i class="fa-solid fa-lock"></i>')
+            }
+        });
+
+        $btnAddModal.on("click", function (event) {
+            Swal.fire({
+                    title: "Registrando...",
+                    text: "Registrando usuario",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    icon: "success"
+            });
+                ocultarAddUserModal();
+                verUsuarios();
+        });
+
+        $("#addUserModal").validate({
+            rules: {
+                nameInputModal: {
+                    required: true,
+                },
+                apellidoInput: {
+                    required: true,
+                },
+                emailInput: {
+                    required: true,
+                },
+                passLblInput: {
+                    required: true,
+                    minlength: 8
+                },
+                passLbl2Input: {
+                    required: true,
+                    minlength: 8
+                },
+                inputGroupFile01: {
+                    required: true,
+                }
+            },
+            messages: {
+                nameInputModal: {
+                    required: "Nombre requerido",  
+                },
+                apellidoInput: {
+                    required: "Apellido requerido",
+                },
+                emailInput: {
+                    required: "Email requerido",
+                },
+                passLblInput: {
+                    required: "Constraseña requerida",
+                    minlength: "La contraseña debe tener al menos 6 caracteres"
+                },
+                passLbl2Input: {
+                    required: "Constraseña requerida",
+                    minlength: "La contraseña debe tener al menos 6 caracteres"
+                },
+                inputGroupFile01: {
+                    required: "Imagen requerida",
+                }
+            },
+            submitHandler: function (form) {
+                const urlPostUsuarios = '@(Url.Action("PostUsuario", "ParkingSystem"))';
+                const urlViewUsuarios = '@(Url.Action("UsuariosView", "Usuarios"))';
+
+                $.ajax({
+                    type: 'post',
+                    data: {
+                        ususario:{
+                            Nombre: $nombreInput[0].value,
+                            Apellido: $apellidoInput[0].value,
+                            Correo: $emailInput[0].value,
+                            Contrasena: $passLblInput[0].value,
+                            Imagen: $imagen[0].value,
+                        }                            
+                    },
+                    url: urlPostUsuarios,
+                    beforeSend: function () {
+                        mostrarModal();
+                    },
+                    success: function (data) {
+                        Swal.fire({
+                            title: "Redirigiendo...",
+                            text: "Inicio de Sesión Exitoso",
+                            showConfirmButton: false,
+                            timer: 2000,
+                            icon: "success"
+                        });
+                        setTimeout(function () {
+                            ocultarModal();
+                            window.location.href = urlViewUsuarios;
+                        }, 3000);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error("Error en la solicitud:", textStatus, errorThrown);
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        console.log("Solicitud completada con estado:", textStatus);
+                    }
+                });
+            },
+            errorPlacement: function (error, element) {
+                if (element.hasClass("input-valid-out")) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            errorElement: 'label',
+            errorClass: 'alert alert-danger alert-validate',
+        });
+    });
 </script>

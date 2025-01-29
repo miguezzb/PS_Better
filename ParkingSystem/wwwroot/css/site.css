@@ -12,6 +12,18 @@ html {
     }
 }
 
+@media (max-width: 991px) {
+    .fa-square-parking {
+        display: inline-block !important;
+    }
+    .fa-car {
+        display: inline-block !important;
+    }
+    .fa-users {
+        display: inline-block !important;
+    }
+}
+
 body {
     margin: 0; 
     display: flex;
@@ -27,14 +39,34 @@ footer {
     margin-top: auto; 
 }
 
-
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #17202a;
 }
 
-.navbarColor {
-    background: #000000;
+.input-group-text, .input-group-text {
+    background-color: white;
 }
+
+    .input-group-text:hover, .input-group-text:focus {
+        background-color: #6c757d;
+        cursor: pointer;
+        color: white;
+    }
+
+.navbarColor {
+    background: black;
+}
+
+.navbar-toggler {
+    border-color: gray;
+}
+
+.navbar-toggler-icon {
+    filter: invert(0); 
+    width: 1.5em;
+    height: 1.5em;
+}
+
 
 .navBtnColor {
     background-color: #17202a;
